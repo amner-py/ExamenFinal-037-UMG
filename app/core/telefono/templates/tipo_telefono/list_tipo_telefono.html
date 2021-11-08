@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Tipo Telefono - List{% endblock title %}
+{% block content %}
+<h1 class="row align-items-center justify-content-center">TIPOS DE TELEFONO</h1>
+<div class="row col-12 justify-content-end mb-2">
+        <a class="btn btn-outline-primary col-md-2" href="{% url 'telefono:addTipoTelefono' %}">AGREGAR</a>
+</div>
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>TIPO DE TELEFONO</th>
+            <th>EDITAR</th>
+            <th>ELIMINAR</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for tipo in object_list %}
+        <tr>
+            <td>{{tipo.id_tipo_telefono}}</td>
+            <td>{{tipo.tipo}}</td>
+            <td>
+                <a href="{% url 'telefono:editTipoTelefono' tipo.id_tipo_telefono %}" class="btn btn-ms btn-outline-success">O</a>
+            </td>
+            <td>
+                <a href="{% url 'telefono:deleteTipoTelefono' tipo.id_tipo_telefono %}" class="btn btn-ms btn-outline-danger">X</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

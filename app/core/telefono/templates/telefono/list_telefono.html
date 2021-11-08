@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Telefono - List{% endblock title %}
+{% block content %}
+<h1 class="row align-items-center justify-content-center">TELEFONOS</h1>
+<div class="row col-12 justify-content-between mb-2">
+    <a class="btn btn-outline-primary col-md-2" href="{% url 'cliente:listCliente' %}">REGRESAR</a>
+    <a class="btn btn-outline-primary col-md-2" href="{% url 'telefono:addTelefono' nit %}">AGREGAR</a>
+</div>
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>NUMERO</th>
+            <th>PREDETERMINADO</th>
+            <th>TIPO DE TELEFONO</th>
+            <th>EDITAR</th>
+            <th>ELIMINAR</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for telefono in telefonos %}
+        <tr>
+            <td>{{telefono.num_telefono}}</td>
+
+            {% if telefono.predeterminado %}
+            <td><input id="predeterminado" type="checkbox" checked></td>
+            {% else %}
+            <td></td>
+            {% endif %}
+            <td>{{telefono.tipo}}</td>
+            <td>
+                <a href="{% url 'telefono:editTelefono' telefono.num_telefono %}" class="btn btn-ms btn-outline-success">O</a>
+            </td>
+            <td>
+                <a href="{% url 'telefono:deleteTelefono' telefono.num_telefono %}" class="btn btn-ms btn-outline-danger">X</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

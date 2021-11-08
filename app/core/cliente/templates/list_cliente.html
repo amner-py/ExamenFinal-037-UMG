@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Cliente - List{% endblock title %}
+{% block content %}
+<h1 class="row align-items-center justify-content-center">CLIENTES</h1>
+<div class="row col-12 justify-content-end mb-2">
+        <a class="btn btn-outline-primary col-md-2" href="{% url 'cliente:addCliente' %}">AGREGAR</a>
+</div>
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>NIT</th>
+            <th>NOMBRE</th>
+            <th>APELLIDO</th>
+            <th>GÉNERO</th>
+            <th>EDAD</th>
+            <th>CORREO</th>
+            <th>FAVORITO</th>
+            <th>TELEFONOS</th>
+            <th>EDITAR</th>
+            <th>ELIMINAR</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for cliente in object_list %}
+        <tr>
+            <td>{{cliente.nit_cliente}}</td>
+            <td>{{cliente.nombre}}</td>
+            <td>{{cliente.apellido}}</td>
+            <td>{{cliente.genero}}</td>
+            <td>{{cliente.edad}}</td>
+            <td>{{cliente.correo}}</td>
+            {% if cliente.favorito %}
+            <td><input type="checkbox" checked disabled></td>
+            {% endif %}
+            <td>
+                <a href="{% url 'telefono:listTelefono' cliente.nit_cliente %}" class="btn btn-ms btn-outline-primary">ver</a>
+            </td>
+            <td>
+                <a href="{% url 'cliente:editCliente' cliente.nit_cliente %}" class="btn btn-ms btn-outline-success">O</a>
+            </td>
+            <td>
+                <a href="{% url 'cliente:deleteCliente' cliente.nit_cliente %}" class="btn btn-ms btn-outline-danger">X</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}
